@@ -11,7 +11,14 @@ const DishCard = ({ dish }) => {
     console.log(dish);
 
     return (
-        <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Card sx={{ 
+            height: '100%', 
+            display: 'flex', 
+            flexDirection: 'column', 
+            justifyContent: 'space-between',
+            border: 1,
+            borderColor: 'text.primary'
+            }}>
             <CardMedia
                 component="img"
                 image={dish.image}
@@ -25,9 +32,16 @@ const DishCard = ({ dish }) => {
                     {dish.description}
                 </Typography>
             </CardContent>
-            <CardActions>
-                <Button size="small">View</Button>
-                <Button size="small">Edit</Button>
+            <CardActions
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <Button variant="contained" size="small">1</Button>
+                <Button variant="contained" size="small">2</Button>
+                <Button variant="contained" size="small">3</Button>
             </CardActions>
         </Card>
     );

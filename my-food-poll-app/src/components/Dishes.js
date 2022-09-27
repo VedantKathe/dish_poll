@@ -61,7 +61,7 @@ const Dishes = () => {
                     sx={{
                         bgcolor: 'background.paper',
                         pt: 4,
-                        pb: 5,
+                        pb: 2,
                     }}
                 >
                     <Container maxWidth="md">
@@ -76,12 +76,11 @@ const Dishes = () => {
                         </Typography>
                     </Container>
                 </Box>
-                <Container sx={{ py: 8, height: 200 }} maxWidth="md">
+                <Container sx={{ pt:2, py: 8, height: 200 }} maxWidth="md">
                     <Grid container spacing={{ xs: 2, md: 3 }} columns={12}>
                         {dishItems.map((card) => (
                             <Grid item key={card.id} xs={12} sm={6} md={4}>
                                 <DishCard
-                                    
                                     dish={card}
                                 />
                             </Grid>
