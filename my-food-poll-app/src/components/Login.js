@@ -26,17 +26,18 @@ const Login = () => {
         const data = new FormData(event.currentTarget);
         const userName = data.get('username');
         const passWord = data.get('password');
-        const currentUser = usersData.filter(
+        const currentUser = usersData.find(
             (singleUser) => singleUser.username === userName
         );
-        if (currentUser.length === 0) {
+        console.log(currentUser);
+        if (currentUser === undefined) {
             enqueueSnackbar(
                 "Something went wrong. This user does not exsist with us, please login with a valid user name.",
                 { variant: `error` }
             );
             return;
         } else {
-            if (currentUser[0].password !== passWord) {
+            if (currentUser.password !== passWord) {
                 enqueueSnackbar(
                     "Something went wrong. This is not the correct password. Please try again!",
                     { variant: `error` }
