@@ -25,6 +25,9 @@ const Dishes = () => {
     const [rankTwo, setRankTwo] = useState(null);
     const [rankThree, setRankThree] = useState(null);
     const [progressIndicator, setProgressIndicator] = useState(false);
+    const [firstDish, setFirstDish] = useState(null);
+    const [secondDish, setSecondDish] = useState(null);
+    const [thirdDish, setThirdDish] = useState(null);
 
     const fetchData = async (address) => {
         setProgressIndicator(true);
@@ -52,6 +55,112 @@ const Dishes = () => {
         }
     };
 
+    function handleRankOne(id) {
+        if (id !== rankTwo && id !== rankThree) {
+            setRankOne(id);
+            //setSelectedBtn(1);
+        }
+
+        if (id === rankTwo) {
+            setRankTwo(null);
+            setRankOne(id);
+            //setSelectedBtn(2);
+        }
+
+        if (id === rankThree) {
+            setRankThree(null);
+            setRankOne(id);
+            //setSelectedBtn(3);
+        }
+
+        const dishesArr = JSON.parse(localStorage.getItem("dishesList"));
+        const currentDish = dishesArr.find(
+            (dish) => dish.id === id
+        );
+        setFirstDish(currentDish.dishName);
+    }
+
+    function handleRankTwo(id) {
+        if (id !== rankOne && id !== rankThree) {
+            setRankTwo(id);
+            //setSelectedBtn(2);
+        }
+
+        // switch rank within same dish item
+        if (id === rankOne) {
+            setRankOne(null);
+            setRankTwo(id);
+            //setSelectedBtn(1);
+        }
+
+        if (id === rankThree) {
+            setRankThree(null);
+            setRankTwo(id);
+            //setSelectedBtn(3);
+        }
+
+        const dishesArr = JSON.parse(localStorage.getItem("dishesList"));
+        const currentDish = dishesArr.find(
+            (dish) => dish.id === id
+        );
+        setSecondDish(currentDish.dishName);
+    }
+
+    function handleRankThree(id) {
+        if (id !== rankOne && id !== rankTwo) {
+            setRankThree(id);
+            //setSelectedBtn(3);
+        }
+
+        // switch rank within same dish item
+        if (id === rankOne) {
+            setRankOne(null);
+            setRankThree(id);
+            //setSelectedBtn(1);
+        }
+
+        if (id === rankTwo) {
+            setRankTwo(null);
+            setRankThree(id);
+            //setSelectedBtn(2);
+        }
+
+        const dishesArr = JSON.parse(localStorage.getItem("dishesList"));
+        const currentDish = dishesArr.find(
+            (dish) => dish.id === id
+        );
+        setThirdDish(currentDish.dishName);
+    }
+
+    function updateDishesRanks(id, value) {
+        // creating an array of dishes
+        let dishesArr = JSON.parse(localStorage.getItem("dishesList"));
+        let newDishAdded = dishesArr.map((item) => {
+          if (item.id === id) {
+              item.votes += value;
+          }
+          return item;
+        });
+        newDishAdded.sort((a, b) => {
+          return parseFloat(b.votes) - parseFloat(a.votes);
+        });
+        localStorage.setItem("dishesList", JSON.stringify(newDishAdded));
+        console.log(newDishAdded);
+      }
+
+      function handleVoting() {
+        updateDishesRanks(rankOne, 30);
+        updateDishesRanks(rankTwo, 20);
+        updateDishesRanks(rankThree, 10);
+      }
+
+      function doNotHandleVoting(){
+        enqueueSnackbar(
+            "Please rank all 3 dishes, before voting",
+            { variant: `error` }
+        );
+      }
+
     useEffect(() => {
         const address = `${config.endpoint}`;
         fetchData(address);
@@ -61,11 +170,12 @@ const Dishes = () => {
     const ProgressComponent = () => {
         return (
             <Box sx={{ display: "flex", justifyContent: "center" }}>
-                <CircularProgress disableShrink  sx={{
-                            mt: 1,
-                            mb: 1,
-                            mx: 1,
-                        }} />
+                <CircularProgress disableShrink
+                    sx={{
+                        mt: 1,
+                        mb: 1,
+                        mx: 1,
+                    }} />
                 <p>Loading Products..</p>
             </Box>
         );
@@ -104,13 +214,36 @@ const Dishes = () => {
                                 Vote for your favourite dishes.
                             </Typography>
                         </Container>
-                        <Button
-                            sx={{ mt: 2 }}
-                            variant="contained"
-                            size="large"
-                        >
-                            Vote
-                        </Button>
+                        {rankOne && rankTwo && rankThree ? (
+                            <Box>
+                                <Typography component="h5" variant="h5">
+                                    {firstDish}
+                                </Typography>
+                                <Typography component="h5" variant="h5">
+                                    {secondDish}
+                                </Typography>
+                                <Typography component="h5" variant="h5">
+                                    {thirdDish}
+                                </Typography>
+                                <button
+                                    sx={{ mt: 2 }}
+                                    variant="contained"
+                                    size="large"
+                                    onClick={handleVoting}
+                                >
+                                    Vote
+                                </button>
+                            </Box>
+                        ) : (
+                            <Button
+                                sx={{ mt: 2 }}
+                                variant="contained"
+                                size="large"
+                                onClick={doNotHandleVoting}
+                            >
+                                Vote
+                            </Button>
+                        )}
                     </Box>
                     {progressIndicator ? (
                         <ProgressComponent />
@@ -121,6 +254,9 @@ const Dishes = () => {
                                     <Grid item key={card.id} xs={12} sm={6} md={4}>
                                         <DishCard
                                             dish={card}
+                                            handleRankOne={handleRankOne}
+                                            handleRankTwo={handleRankTwo}
+                                            handleRankThree={handleRankThree}
                                         />
                                     </Grid>
                                 ))}

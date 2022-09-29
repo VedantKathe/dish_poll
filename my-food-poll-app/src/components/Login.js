@@ -29,7 +29,6 @@ const Login = () => {
         const currentUser = usersData.find(
             (singleUser) => singleUser.username === userName
         );
-        console.log(currentUser);
         if (currentUser === undefined) {
             enqueueSnackbar(
                 "Something went wrong. This user does not exsist with us, please login with a valid user name.",

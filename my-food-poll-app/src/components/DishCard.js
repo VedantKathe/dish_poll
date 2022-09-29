@@ -6,19 +6,21 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
-const DishCard = ({ dish }) => {
-
-    console.log(dish);
+const DishCard = ({
+    dish,
+    handleRankOne,
+    handleRankTwo,
+    handleRankThree, }) => {
 
     return (
-        <Card sx={{ 
-            height: '100%', 
-            display: 'flex', 
-            flexDirection: 'column', 
+        <Card sx={{
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'space-between',
             border: 1,
             borderColor: 'text.primary'
-            }}>
+        }}>
             <CardMedia
                 component="img"
                 image={dish.image}
@@ -39,9 +41,27 @@ const DishCard = ({ dish }) => {
                     justifyContent: 'space-between',
                 }}
             >
-                <Button variant="contained" size="small">1</Button>
-                <Button variant="contained" size="small">2</Button>
-                <Button variant="contained" size="small">3</Button>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => handleRankOne(dish.id)}
+                >
+                    1
+                </Button>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => handleRankTwo(dish.id)}
+                >
+                    2
+                </Button>
+                <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => handleRankThree(dish.id)}
+                >
+                    3
+                </Button>
             </CardActions>
         </Card>
     );
