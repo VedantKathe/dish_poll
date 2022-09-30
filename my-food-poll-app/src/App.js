@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Dishes from "./components/Dishes";
+import Results from "./components/Results";
 
 export const config = {
   endpoint: `https://raw.githubusercontent.com/syook/react-dishpoll/main/db.json`,
@@ -20,6 +21,9 @@ function App() {
         </Route>
         <Route path="/dishes">
           <Dishes />
+        </Route>
+        <Route path="/results">
+          <Results />
         </Route>
       </Switch>
     </div>

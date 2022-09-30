@@ -14,6 +14,7 @@ import DishCard from "./DishCard";
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -28,6 +29,8 @@ const Dishes = () => {
     const [firstDish, setFirstDish] = useState(null);
     const [secondDish, setSecondDish] = useState(null);
     const [thirdDish, setThirdDish] = useState(null);
+    const [isVoting, setIsVoting] = useState(false);
+    const history = useHistory();
 
     const fetchData = async (address) => {
         setProgressIndicator(true);
@@ -136,30 +139,35 @@ const Dishes = () => {
         // creating an array of dishes
         let dishesArr = JSON.parse(localStorage.getItem("dishesList"));
         let newDishAdded = dishesArr.map((item) => {
-          if (item.id === id) {
-              item.votes += value;
-          }
-          return item;
+            if (item.id === id) {
+                item.votes += value;
+            }
+            return item;
         });
         newDishAdded.sort((a, b) => {
-          return parseFloat(b.votes) - parseFloat(a.votes);
+            return parseFloat(b.votes) - parseFloat(a.votes);
         });
         localStorage.setItem("dishesList", JSON.stringify(newDishAdded));
         console.log(newDishAdded);
-      }
+    }
 
-      function handleVoting() {
+    function handleVoting() {
+        setIsVoting(true);
         updateDishesRanks(rankOne, 30);
         updateDishesRanks(rankTwo, 20);
         updateDishesRanks(rankThree, 10);
-      }
 
-      function doNotHandleVoting(){
+        setTimeout(() => {
+            history.push("/results");
+        }, 1000);
+    }
+
+    function doNotHandleVoting() {
         enqueueSnackbar(
             "Please rank all 3 dishes, before voting",
             { variant: `error` }
         );
-      }
+    }
 
     useEffect(() => {
         const address = `${config.endpoint}`;
@@ -215,24 +223,87 @@ const Dishes = () => {
                             </Typography>
                         </Container>
                         {rankOne && rankTwo && rankThree ? (
-                            <Box>
-                                <Typography component="h5" variant="h5">
-                                    {firstDish}
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    alignItems: 'center',
+                                    justifyContent: 'space-between',
+                                }}
+                            >
+                                <Typography>
+                                    You've chosen to vote for..
                                 </Typography>
-                                <Typography component="h5" variant="h5">
-                                    {secondDish}
-                                </Typography>
-                                <Typography component="h5" variant="h5">
-                                    {thirdDish}
-                                </Typography>
-                                <button
-                                    sx={{ mt: 2 }}
-                                    variant="contained"
-                                    size="large"
-                                    onClick={handleVoting}
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-evenly',
+                                        alignItems: 'center',
+                                        width: '60%',
+                                    }}
                                 >
-                                    Vote
-                                </button>
+                                    <Box sx={{
+                                        m: 1,
+                                        p: 1,
+                                        border: 1,
+                                        borderColor: 'text.primary',
+                                        borderRadius: '8px',
+                                        width: '100%',
+                                        height: '100%',
+                                    }} >
+                                        <Typography>
+                                            1st
+                                        </Typography>
+                                        <Typography>
+                                            {firstDish}
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{
+                                        m: 1,
+                                        p: 1,
+                                        border: 1,
+                                        borderColor: 'text.primary',
+                                        borderRadius: '8px',
+                                        width: '100%',
+                                        height: '100%',
+                                    }}>
+                                        <Typography>
+                                            2nd
+                                        </Typography>
+                                        <Typography>
+                                            {secondDish}
+                                        </Typography>
+                                    </Box>
+                                    <Box sx={{
+                                        m: 1,
+                                        p: 1,
+                                        border: 1,
+                                        borderColor: 'text.primary',
+                                        borderRadius: '8px',
+                                        width: '100%',
+                                        height: '100%',
+                                    }}>
+                                        <Typography>
+                                            3rd
+                                        </Typography>
+                                        <Typography>
+                                            {thirdDish}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                                {isVoting ? (
+                                    <ProgressComponent />
+                                ) : (
+                                    <Button
+                                        sx={{ mt: 2 }}
+                                        variant="contained"
+                                        size="large"
+                                        onClick={handleVoting}
+                                    >
+                                        Vote
+                                    </Button>
+                                )}
                             </Box>
                         ) : (
                             <Button
