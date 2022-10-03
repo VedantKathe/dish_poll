@@ -13,11 +13,15 @@ import Typography from '@mui/material/Typography';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import { useHistory } from "react-router-dom";
 
 const theme = createTheme();
 
 const Results = () => {
 
+    const history = useHistory();
     const [rows, setRows] = useState([]);
 
     useEffect(() => {
@@ -31,30 +35,76 @@ const Results = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <AppBar position="relative">
-                <Toolbar>
-                    <RestaurantIcon sx={{ mr: 2 }} />
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Dish Poll
-                    </Typography>
+            <Toolbar
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-evenly',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <RestaurantIcon sx={{ mr: 2 }} />
+                        <Typography variant="h6" color="inherit" noWrap>
+                            Dish Poll
+                        </Typography>
+                    </Box>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        sx={{
+                            mx: 1
+                        }}
+                        onClick={() => history.push("/", { from: "Home" })}
+                    >
+                        Logout
+                    </Button>
                 </Toolbar>
             </AppBar>
-            <Container>
+            <Container
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                    width: '60%',
+                    my: 5
+                }}
+            >
+                <Typography
+                    component="h5"
+                    variant="h5"
+                    align="center"
+                    color="text.primary"
+                    gutterBottom
+                >
+                    Poll Results!
+                </Typography>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
+                                <TableCell align="left">Position</TableCell>
                                 <TableCell align="left">Dish Name</TableCell>
                                 <TableCell align="left">Votes</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => (
+                            {rows.map((row, index) => (
                                 <TableRow
-                                    key={row.name}
+                                    key={row.id}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell align="right">{row.dishName}</TableCell>
-                                    <TableCell align="right">{row.votes}</TableCell>
+                                    <TableCell align="left">{index + 1}</TableCell>
+                                    <TableCell align="left">{row.dishName}</TableCell>
+                                    <TableCell align="left">{row.votes}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
@@ -63,11 +113,6 @@ const Results = () => {
             </Container>
         </ThemeProvider>
     );
-
-
-
-
-
 };
 
 export default Results;

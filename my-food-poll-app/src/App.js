@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Home from "./components/Home";
 import Dishes from "./components/Dishes";
 import Results from "./components/Results";
+import React from "react";
 
 export const config = {
   endpoint: `https://raw.githubusercontent.com/syook/react-dishpoll/main/db.json`,

@@ -21,11 +21,37 @@ const Home = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <AppBar position="relative">
-                <Toolbar>
-                    <RestaurantIcon sx={{ mr: 2 }} />
-                    <Typography variant="h6" color="inherit" noWrap>
-                        Dish Poll
-                    </Typography>
+                <Toolbar
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-evenly',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <RestaurantIcon sx={{ mr: 2 }} />
+                        <Typography variant="h6" color="inherit" noWrap>
+                            Dish Poll
+                        </Typography>
+                    </Box>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        sx={{
+                            mx: 1
+                        }}
+                        onClick={() => history.push("/", { from: "Home" })}
+                    >
+                        Logout
+                    </Button>
                 </Toolbar>
             </AppBar>
             <main>
@@ -47,7 +73,7 @@ const Home = () => {
                             Welcome to Dish Poll
                         </Typography>
                         <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                        You are given a list of dishes, rank them from 1 to 3 according to your choice. Each selection will be given points based on the rank (Rank 1 gets 30 points, Rank 2 gets 20, Rank 3 gets 10). Fret not, as you'll be able to edit your choices later. Based on the voting of all the users, results will be calculated. So vote for your favourite dishes to make them win!
+                            You are given a list of dishes, rank them from 1 to 3 according to your choice. Each selection will be given points based on the rank (Rank 1 gets 30 points, Rank 2 gets 20, Rank 3 gets 10). Based on the voting of all the users, results will be calculated. So vote for your favourite dishes to make them win!
                         </Typography>
                         <Stack
                             sx={{ pt: 4 }}
@@ -55,12 +81,19 @@ const Home = () => {
                             spacing={2}
                             justifyContent="center"
                         >
-                            <Button 
-                             variant="contained"
-                             onClick={() => history.push("/dishes", { from: "Header" })}
-                            
-                            >Vote for Dishes</Button>
-                            <Button variant="outlined">Poll Results</Button>
+                            <Button
+                                variant="contained"
+                                onClick={() => history.push("/dishes", { from: "Home" })}
+
+                            >
+                                Vote for Dishes
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                onClick={() => history.push("/results", { from: "Home" })}
+                            >
+                                Poll Results
+                            </Button>
                         </Stack>
                     </Container>
                 </Box>

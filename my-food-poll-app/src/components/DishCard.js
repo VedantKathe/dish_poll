@@ -10,7 +10,11 @@ const DishCard = ({
     dish,
     handleRankOne,
     handleRankTwo,
-    handleRankThree, }) => {
+    handleRankThree,
+    rankOne,
+    rankTwo,
+    rankThree
+    }) => {
 
     return (
         <Card sx={{
@@ -44,6 +48,7 @@ const DishCard = ({
                 <Button
                     variant="contained"
                     size="small"
+                    color={rankOne === dish.id ? "secondary" : "primary"}
                     onClick={() => handleRankOne(dish.id)}
                 >
                     1
@@ -51,6 +56,7 @@ const DishCard = ({
                 <Button
                     variant="contained"
                     size="small"
+                    color={rankTwo === dish.id ? "secondary" : "primary"}
                     onClick={() => handleRankTwo(dish.id)}
                 >
                     2
@@ -58,6 +64,7 @@ const DishCard = ({
                 <Button
                     variant="contained"
                     size="small"
+                    color={rankThree === dish.id ? "secondary" : "primary"}
                     onClick={() => handleRankThree(dish.id)}
                 >
                     3

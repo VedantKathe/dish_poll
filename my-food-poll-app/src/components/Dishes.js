@@ -195,11 +195,57 @@ const Dishes = () => {
             <CssBaseline />
             <div>
                 <AppBar position="relative">
-                    <Toolbar>
-                        <RestaurantIcon sx={{ mr: 2 }} />
-                        <Typography variant="h6" color="inherit" noWrap>
-                            Dish Poll
-                        </Typography>
+                    <Toolbar
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-evenly',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <RestaurantIcon sx={{ mr: 2 }} />
+                            <Typography variant="h6" color="inherit" noWrap>
+                                Dish Poll
+                            </Typography>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'space-evenly',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                sx={{
+                                    mx: 1
+                                }}
+                                onClick={() => history.push("/home", { from: "Dishes" })}
+                            >
+                                Home
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                sx={{
+                                    mx: 1
+                                }}
+                                onClick={() => history.push("/", { from: "Dishes" })}
+                            >
+                                Logout
+                            </Button>
+
+                        </Box>
                     </Toolbar>
                 </AppBar>
                 <main>
@@ -328,6 +374,9 @@ const Dishes = () => {
                                             handleRankOne={handleRankOne}
                                             handleRankTwo={handleRankTwo}
                                             handleRankThree={handleRankThree}
+                                            rankOne={rankOne}
+                                            rankTwo={rankTwo}
+                                            rankThree={rankThree}
                                         />
                                     </Grid>
                                 ))}
