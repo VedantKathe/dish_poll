@@ -18,8 +18,6 @@ const Login = () => {
 
     const { enqueueSnackbar } = useSnackbar();
     const history = useHistory();
-    //const navigate = useNavigate();
-    //const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -43,11 +41,7 @@ const Login = () => {
                 );
                 return;
             }
-            localStorage.setItem("authenticated", true);
-            //setIsUserLoggedIn(true);
-            //navigate("/home");
             history.push("/home");
-            //setIsUserLoggedIn(false);
         }
     };
 

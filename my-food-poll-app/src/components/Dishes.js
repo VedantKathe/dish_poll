@@ -61,19 +61,16 @@ const Dishes = () => {
     function handleRankOne(id) {
         if (id !== rankTwo && id !== rankThree) {
             setRankOne(id);
-            //setSelectedBtn(1);
         }
 
         if (id === rankTwo) {
             setRankTwo(null);
             setRankOne(id);
-            //setSelectedBtn(2);
         }
 
         if (id === rankThree) {
             setRankThree(null);
             setRankOne(id);
-            //setSelectedBtn(3);
         }
 
         const dishesArr = JSON.parse(localStorage.getItem("dishesList"));
@@ -86,20 +83,16 @@ const Dishes = () => {
     function handleRankTwo(id) {
         if (id !== rankOne && id !== rankThree) {
             setRankTwo(id);
-            //setSelectedBtn(2);
         }
 
-        // switch rank within same dish item
         if (id === rankOne) {
             setRankOne(null);
             setRankTwo(id);
-            //setSelectedBtn(1);
         }
 
         if (id === rankThree) {
             setRankThree(null);
             setRankTwo(id);
-            //setSelectedBtn(3);
         }
 
         const dishesArr = JSON.parse(localStorage.getItem("dishesList"));
@@ -112,20 +105,16 @@ const Dishes = () => {
     function handleRankThree(id) {
         if (id !== rankOne && id !== rankTwo) {
             setRankThree(id);
-            //setSelectedBtn(3);
         }
 
-        // switch rank within same dish item
         if (id === rankOne) {
             setRankOne(null);
             setRankThree(id);
-            //setSelectedBtn(1);
         }
 
         if (id === rankTwo) {
             setRankTwo(null);
             setRankThree(id);
-            //setSelectedBtn(2);
         }
 
         const dishesArr = JSON.parse(localStorage.getItem("dishesList"));
@@ -136,7 +125,6 @@ const Dishes = () => {
     }
 
     function updateDishesRanks(id, value) {
-        // creating an array of dishes
         let dishesArr = JSON.parse(localStorage.getItem("dishesList"));
         let newDishAdded = dishesArr.map((item) => {
             if (item.id === id) {
@@ -184,7 +172,7 @@ const Dishes = () => {
                         mb: 1,
                         mx: 1,
                     }} />
-                <p>Loading Products..</p>
+                <p>Loading..</p>
             </Box>
         );
     };
