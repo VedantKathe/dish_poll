@@ -5,7 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Stack from '@mui/material/Stack';
 import RestaurantIcon from '@mui/icons-material/Restaurant';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -75,12 +74,6 @@ const Home = () => {
                         <Typography variant="h5" align="center" color="text.secondary" paragraph>
                             You are given a list of dishes, rank them from 1 to 3 according to your choice. Each selection will be given points based on the rank (Rank 1 gets 30 points, Rank 2 gets 20, Rank 3 gets 10). Based on the voting of all the users, results will be calculated. So vote for your favourite dishes to make them win!
                         </Typography>
-                        <Stack
-                            sx={{ pt: 4 }}
-                            direction="row"
-                            spacing={2}
-                            justifyContent="center"
-                        >
                             <Button
                                 variant="contained"
                                 onClick={() => history.push("/dishes", { from: "Home" })}
@@ -88,13 +81,6 @@ const Home = () => {
                             >
                                 Vote for Dishes
                             </Button>
-                            <Button
-                                variant="outlined"
-                                onClick={() => history.push("/results", { from: "Home" })}
-                            >
-                                Poll Results
-                            </Button>
-                        </Stack>
                     </Container>
                 </Box>
             </main>

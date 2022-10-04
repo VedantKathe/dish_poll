@@ -35,7 +35,7 @@ const Results = () => {
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <AppBar position="relative">
-            <Toolbar
+                <Toolbar
                     sx={{
                         display: 'flex',
                         flexDirection: 'row',
@@ -56,16 +56,35 @@ const Results = () => {
                             Dish Poll
                         </Typography>
                     </Box>
-                    <Button
-                        variant="contained"
-                        color="secondary"
+                    <Box
                         sx={{
-                            mx: 1
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-evenly',
+                            alignItems: 'center',
                         }}
-                        onClick={() => history.push("/", { from: "Home" })}
                     >
-                        Logout
-                    </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            sx={{
+                                mx: 1
+                            }}
+                            onClick={() => history.push("/home", { from: "Dishes" })}
+                        >
+                            Home
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            sx={{
+                                mx: 1
+                            }}
+                            onClick={() => history.push("/", { from: "Dishes" })}
+                        >
+                            Logout
+                        </Button>
+                    </Box>
                 </Toolbar>
             </AppBar>
             <Container
