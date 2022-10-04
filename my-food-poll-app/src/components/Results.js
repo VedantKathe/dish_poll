@@ -70,7 +70,7 @@ const Results = () => {
                             sx={{
                                 mx: 1
                             }}
-                            onClick={() => history.push("/home", { from: "Dishes" })}
+                            onClick={() => history.push("/home", { from: "Results" })}
                         >
                             Home
                         </Button>
@@ -80,7 +80,7 @@ const Results = () => {
                             sx={{
                                 mx: 1
                             }}
-                            onClick={() => history.push("/", { from: "Dishes" })}
+                            onClick={() => history.push("/", { from: "Results" })}
                         >
                             Logout
                         </Button>
